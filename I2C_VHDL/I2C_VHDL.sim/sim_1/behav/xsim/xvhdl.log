@@ -1,0 +1,6 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/clkgen_200khz.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'clkgen_200kHz'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/i2c_master.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'i2c_master'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/container.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'top'
