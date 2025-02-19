@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Tue Feb 18 15:22:32 2025
+| Date         : Wed Feb 19 20:09:21 2025
 | Host         : my_laptop running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -23,12 +23,13 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 40
-+-----------+------------------+-----------------------------+--------+
-| Rule      | Severity         | Description                 | Checks |
-+-----------+------------------+-----------------------------+--------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell | 40     |
-+-----------+------------------+-----------------------------+--------+
+             Checks found: 45
++-----------+------------------+-------------------------------+--------+
+| Rule      | Severity         | Description                   | Checks |
++-----------+------------------+-------------------------------+--------+
+| TIMING-17 | Critical Warning | Non-clocked sequential cell   | 40     |
+| TIMING-18 | Warning          | Missing input or output delay | 5      |
++-----------+------------------+-------------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
@@ -230,6 +231,31 @@ Related violations: <none>
 TIMING-17#40 Critical Warning
 Non-clocked sequential cell  
 The clock pin seven_seg_display_inst/switch_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on cs relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on mosi relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An input delay is missing on rst relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An input delay is missing on sclk relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An output delay is missing on miso relative to the rising and/or falling clock edge(s) of sys_clk_pin.
 Related violations: <none>
 
 

@@ -10,7 +10,12 @@ entity top is
         TMP_SCL   : out STD_LOGIC;   -- I2C SCL output
         LED       : out STD_LOGIC_VECTOR (7 downto 0);  -- Nexys LEDs = binary temp in °C
         anode_pins: out std_logic_vector (7 downto 0);
-        cathode_pins: out std_logic_vector (6 downto 0)
+        cathode_pins: out std_logic_vector (6 downto 0);
+        sclk        : in  STD_LOGIC;  -- SPI Clock from Raspberry Pi
+        mosi        : in  STD_LOGIC;  -- Master Out Slave In
+        miso        : out STD_LOGIC;  -- Master In Slave Out
+        cs          : in  STD_LOGIC; -- Chip Select (active low)
+        rst : in STD_LOGIC    -- Reset button
     );
 end top;
 
@@ -22,6 +27,16 @@ architecture Behavioral of top is
     signal temp_tens : integer; 
     signal temp_units : integer;
     signal clk_2ms_sig : std_logic ;
+    signal start_sig : std_logic :='1';
+    signal busy_sig : std_logic;
+    signal data_out_sig : STD_LOGIC_VECTOR (7 downto 0);
+    signal test_data : STD_LOGIC_VECTOR (7 downto 0):="10101010";
+            signal received_data_sig : STD_LOGIC_VECTOR(7 downto 0);
+        signal send_data_sig    :  STD_LOGIC_VECTOR(7 downto 0):="11000001";
+--        signal rst: std_logic :='0';
+        signal DIN_VLD : std_logic :='1';
+        signal DIN_RDY : std_logic :='0';
+        signal DOUT_VLD : std_logic :='0';
     -- Component declaration for I2C master
     component i2c_master
         Port (
@@ -50,9 +65,28 @@ architecture Behavioral of top is
 		cathode_pins: out std_logic_vector (6 downto 0)
         );
     end component;
-
+     component SPI_Slave is
+        Generic (
+        WORD_SIZE : natural := 8 -- size of transfer word in bits, must be power of two
+    );
+    Port (
+        CLK      : in  std_logic; -- system clock
+        RST      : in  std_logic; -- high active synchronous reset
+        -- SPI SLAVE INTERFACE
+        SCLK     : in  std_logic; -- SPI clock
+        CS_N     : in  std_logic; -- SPI chip select, active in low
+        MOSI     : in  std_logic; -- SPI serial data from master to slave
+        MISO     : out std_logic; -- SPI serial data from slave to master
+        -- USER INTERFACE
+        DIN      : in  std_logic_vector(WORD_SIZE-1 downto 0); -- data for transmission to SPI master
+        DIN_VLD  : in  std_logic; -- when DIN_VLD = 1, data for transmission are valid
+        DIN_RDY  : out std_logic; -- when DIN_RDY = 1, SPI slave is ready to accept valid data for transmission
+        DOUT     : out std_logic_vector(WORD_SIZE-1 downto 0); -- received data from SPI master
+        DOUT_VLD : out std_logic  -- when DOUT_VLD = 1, received data are valid
+    );
+    end component;
 begin
-
+test_data<=w_data;
     -- Instantiate I2C master
     i2c_master_inst : i2c_master
         port map (
@@ -78,7 +112,8 @@ begin
             anode_pins=>anode_pins,
             cathode_pins=>cathode_pins
         );
-
+spi_slave_inst: SPI_Slave
+port map(CLK=>CLK100MHZ,RST=>rst,SCLK=>sclk,MOSI=>mosi,MISO=>miso,CS_N=>cs,DOUT=>received_data_sig,DIN=>w_data,DOUT_VLD=>DOUT_VLD,DIN_VLD=>DIN_VLD,DIN_RDY=>DIN_RDY);
     -- Set LED value to temp data
     LED <= w_data;
 

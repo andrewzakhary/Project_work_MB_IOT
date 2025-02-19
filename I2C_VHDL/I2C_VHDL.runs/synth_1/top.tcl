@@ -58,7 +58,6 @@ if {$::dispatch::connected} {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 3
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
@@ -75,6 +74,7 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
+  C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/SPI_Slave.vhd
   C:/Users/andre/Desktop/Components/_7seg_decoder.vhd
   C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/clkgen_200khz.vhd
   C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/i2c_master.vhd
