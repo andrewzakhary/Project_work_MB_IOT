@@ -9,7 +9,8 @@ entity i2c_master is
         SDA        : inout std_logic;      -- I2C Data Line
         temp_data  : out std_logic_vector(7 downto 0); -- Temperature data (8-bit)
         SDA_dir    : inout std_logic;        -- SDA direction (1 = output, 0 = input)
-        SCL        : out std_logic         -- I2C Clock at 10kHz
+        SCL        : out std_logic;         -- I2C Clock at 10kHz
+	cnt:out integer
     );
 end entity i2c_master;
 
@@ -37,7 +38,7 @@ begin
     -- Generate 10kHz SCL Clock 
     process(clk_200kHz, reset)
     begin
-        if reset = '1' then
+        if reset = '0' then
             counter <= 0;
             clk_reg <= '0';
         elsif rising_edge(clk_200kHz) then
@@ -55,7 +56,7 @@ begin
     -- I2C State Machine
     process(clk_200kHz, reset)
     begin
-        if reset = '1' then
+        if reset = '0' then
             state_reg <= POWER_UP;
             count <= 0;
         elsif rising_edge(clk_200kHz) then
@@ -88,8 +89,9 @@ begin
 
                 -- Receive MSB bits
                 when REC_MSB =>
+			if count < 2349 then
                     tMSB(7-((count-2189)/20)) <= i_bit;
-                    if count = 2349 then state_reg <= SEND_ACK; end if;
+                    elsif count = 2349 then state_reg <= SEND_ACK;o_bit<='0';end if;
                      
                 -- Send Ack of MSB bits
                 when SEND_ACK =>
@@ -97,8 +99,9 @@ begin
 
                 -- Receive LSB bits
                 when REC_LSB =>
+if count < 2529 then
                     tLSB(7-((count-2369)/20)) <= i_bit;
-                    if count = 2529 then state_reg <= NACK; end if;
+                    elsif count = 2529 then state_reg <= NACK;o_bit<='1'; end if;
                 -- IDLE , ready for next cycle
                 when NACK =>
                     if count = 2559 then
@@ -125,5 +128,6 @@ state_reg = NACK)
     -- Assign SDA data output
     SDA <= o_bit when SDA_dir = '1' else 'Z';
     i_bit <= SDA;
+	cnt<=count;
 
 end rtl;

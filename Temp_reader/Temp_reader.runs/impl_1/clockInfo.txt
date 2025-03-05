@@ -1,6 +1,6 @@
 -------------------------------------
 | Tool Version : Vivado v.2024.2
-| Date         : Tue Mar  4 00:36:52 2025
+| Date         : Wed Mar  5 21:54:24 2025
 | Host         : my_laptop
 | Design       : design_1
 | Device       : xc7a100t-csg324-1--

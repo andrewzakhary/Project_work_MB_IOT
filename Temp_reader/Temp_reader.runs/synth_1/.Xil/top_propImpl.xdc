@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/constrs_1/new/master.xdc rfile:../../../I2C_VHDL.srcs/constrs_1/new/master.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:C:/Users/andre/Temp_reader/Temp_reader.srcs/constrs_1/new/master.xdc rfile:../../../Temp_reader.srcs/constrs_1/new/master.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:2 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports { CLK100MHZ }]; #IO_L12P_T1_MRCC_35 Sch=clk100mhz
 set_property src_info {type:XDC file:1 line:6 export:INPUT save:INPUT read:READ} [current_design]
@@ -17,8 +17,6 @@ set_property src_info {type:XDC file:1 line:12 export:INPUT save:INPUT read:READ
 set_property -dict { PACKAGE_PIN U17   IOSTANDARD LVCMOS33 } [get_ports { LED[6] }]; #IO_L17P_T2_A14_D30_14 Sch=led[6]
 set_property src_info {type:XDC file:1 line:13 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict { PACKAGE_PIN U16   IOSTANDARD LVCMOS33 } [get_ports { LED[7] }]; #IO_L18P_T2_A12_D28_14 Sch=led[7]
-set_property src_info {type:XDC file:1 line:16 export:INPUT save:INPUT read:READ} [current_design]
-set_property -dict { PACKAGE_PIN N17   IOSTANDARD LVCMOS33 } [get_ports { reset }]; #IO_L9P_T1_DQS_14 Sch=btnc
 set_property src_info {type:XDC file:1 line:17 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict { PACKAGE_PIN C12   IOSTANDARD LVCMOS33 } [get_ports { rst }]; #IO_L3P_T0_DQS_AD1P_15 Sch=cpu_resetn
 set_property src_info {type:XDC file:1 line:20 export:INPUT save:INPUT read:READ} [current_design]

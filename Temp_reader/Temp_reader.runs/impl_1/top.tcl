@@ -1,5 +1,5 @@
 namespace eval ::optrace {
-  variable script "C:/Users/andre/I2C_VHDL/I2C_VHDL.runs/impl_1/top.tcl"
+  variable script "C:/Users/andre/Temp_reader/Temp_reader.runs/impl_1/top.tcl"
   variable category "vivado_impl"
 }
 
@@ -97,7 +97,6 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
 
 OPTRACE "impl_1" START { ROLLUP_1 }
 OPTRACE "Phase: Init Design" START { ROLLUP_AUTO }
@@ -105,7 +104,6 @@ start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param tcl.statsThreshold 360
   set_param chipscope.maxJobs 3
   set_param xicom.use_bs_reader 1
   set_param runs.launchOptions { -jobs 12  }
@@ -115,15 +113,15 @@ OPTRACE "create in-memory project" START { }
   set_param project.singleFileAddWarning.threshold 0
 OPTRACE "create in-memory project" END { }
 OPTRACE "set parameters" START { }
-  set_property webtalk.parent_dir C:/Users/andre/I2C_VHDL/I2C_VHDL.cache/wt [current_project]
-  set_property parent.project_path C:/Users/andre/I2C_VHDL/I2C_VHDL.xpr [current_project]
-  set_property ip_output_repo C:/Users/andre/I2C_VHDL/I2C_VHDL.cache/ip [current_project]
+  set_property webtalk.parent_dir C:/Users/andre/Temp_reader/Temp_reader.cache/wt [current_project]
+  set_property parent.project_path C:/Users/andre/Temp_reader/Temp_reader.xpr [current_project]
+  set_property ip_output_repo C:/Users/andre/Temp_reader/Temp_reader.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
-  add_files -quiet C:/Users/andre/I2C_VHDL/I2C_VHDL.runs/synth_1/top.dcp
+  add_files -quiet C:/Users/andre/Temp_reader/Temp_reader.runs/synth_1/top.dcp
 OPTRACE "read constraints: implementation" START { }
-  read_xdc C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/constrs_1/new/master.xdc
+  read_xdc C:/Users/andre/Temp_reader/Temp_reader.srcs/constrs_1/new/master.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "read constraints: implementation_pre" START { }
 OPTRACE "read constraints: implementation_pre" END { }

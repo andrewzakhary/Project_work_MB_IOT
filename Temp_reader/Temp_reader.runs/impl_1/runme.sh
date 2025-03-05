@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/andre/I2C_VHDL/I2C_VHDL.runs/impl_1'
+HD_PWD='C:/Users/andre/Temp_reader/Temp_reader.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

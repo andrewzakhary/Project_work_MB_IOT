@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/andre/I2C_VHDL/I2C_VHDL.runs/synth_1/top.tcl"
+  variable script "C:/Users/andre/Temp_reader/Temp_reader.runs/synth_1/top.tcl"
   variable category "vivado_synth"
 }
 
@@ -56,30 +56,28 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param tcl.statsThreshold 360
 set_param chipscope.maxJobs 3
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/andre/I2C_VHDL/I2C_VHDL.cache/wt [current_project]
-set_property parent.project_path C:/Users/andre/I2C_VHDL/I2C_VHDL.xpr [current_project]
+set_property webtalk.parent_dir C:/Users/andre/Temp_reader/Temp_reader.cache/wt [current_project]
+set_property parent.project_path C:/Users/andre/Temp_reader/Temp_reader.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo c:/Users/andre/I2C_VHDL/I2C_VHDL.cache/ip [current_project]
+set_property ip_output_repo c:/Users/andre/Temp_reader/Temp_reader.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
-  C:/Users/andre/Documents/GitHub/Project_work_MB_IOT/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/7seg.vhd
-  C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/SPI_Slave.vhd
-  C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/clkgen_200khz.vhd
-  C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/i2c_master.vhd
-  C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/sources_1/new/container.vhd
+  C:/Users/andre/Temp_reader/Temp_reader.srcs/sources_1/new/SPI_Slave.vhd
+  C:/Users/andre/Temp_reader/Temp_reader.srcs/sources_1/new/clkgen_200khz.vhd
+  C:/Users/andre/Temp_reader/Temp_reader.srcs/sources_1/new/i2c_master.vhd
+  C:/Users/andre/Temp_reader/Temp_reader.srcs/sources_1/new/seven_seg.vhd
+  C:/Users/andre/Temp_reader/Temp_reader.srcs/sources_1/new/container.vhd
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -90,12 +88,12 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/constrs_1/new/master.xdc
-set_property used_in_implementation false [get_files C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/constrs_1/new/master.xdc]
+read_xdc C:/Users/andre/Temp_reader/Temp_reader.srcs/constrs_1/new/master.xdc
+set_property used_in_implementation false [get_files C:/Users/andre/Temp_reader/Temp_reader.srcs/constrs_1/new/master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 
-read_checkpoint -auto_incremental -incremental C:/Users/andre/I2C_VHDL/I2C_VHDL.srcs/utils_1/imports/synth_1/top.dcp
+read_checkpoint -auto_incremental -incremental C:/Users/andre/Temp_reader/Temp_reader.srcs/utils_1/imports/synth_1/top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

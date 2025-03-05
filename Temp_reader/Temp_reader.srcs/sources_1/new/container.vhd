@@ -5,14 +5,12 @@ use ieee.numeric_std.all;
 entity top is
     Port ( 
         CLK100MHZ : in STD_LOGIC;    -- Nexys clock signal
-        reset     : in STD_LOGIC;    -- Reset button
         TMP_SDA   : inout STD_LOGIC; -- I2C SDA bidirectional
         TMP_SCL   : out STD_LOGIC;   -- I2C SCL output
         LED       : out STD_LOGIC_VECTOR (7 downto 0);  -- Nexys LEDs = binary temp in °C
         anode_pins: out std_logic_vector (7 downto 0);
         cathode_pins: out std_logic_vector (6 downto 0);
         sclk        : in  STD_LOGIC;  -- SPI Clock from Raspberry Pi
---        mosi        : in  STD_LOGIC;  -- Master Out Slave In
         miso        : out STD_LOGIC;  -- Master In Slave Out
         cs          : in  STD_LOGIC; -- Chip Select (active low)
         rst : in STD_LOGIC    -- Reset button
@@ -24,20 +22,7 @@ architecture Behavioral of top is
     signal sda_dir  : STD_LOGIC; -- Direction of SDA signal (to/from master)
     signal w_200kHz : STD_LOGIC; -- 200kHz SCL
     signal w_data   : STD_LOGIC_VECTOR (7 downto 0); -- 8-bit temperature data
-    signal temp_tens : integer; 
-    signal temp_units : integer;
     signal clk_2ms_sig : std_logic ;
-    signal start_sig : std_logic :='1';
-    signal busy_sig : std_logic;
-    signal data_out_sig : STD_LOGIC_VECTOR (7 downto 0);
-    signal test_data : STD_LOGIC_VECTOR (7 downto 0):="10101010";
-            signal received_data_sig : STD_LOGIC_VECTOR(7 downto 0);
-        signal send_data_sig    :  STD_LOGIC_VECTOR(7 downto 0):="11000001";
---        signal rst: std_logic :='0';
-        signal DIN_VLD : std_logic :='1';
-        signal DIN_RDY : std_logic :='0';
-        signal DOUT_VLD : std_logic :='0';
-    -- Component declaration for I2C master
     component i2c_master
         Port (
             clk_200kHz : in STD_LOGIC;
@@ -66,27 +51,21 @@ architecture Behavioral of top is
         );
     end component;
      component SPI_SLAVE_TX is
-        Generic (
-        WORD_SIZE : natural := 8 -- size of transfer word in bits, must be power of two
-    );
     Port (
         CLK      : in  std_logic;
         RST      : in  std_logic;
         SCLK     : in  std_logic;
         CS_N     : in  std_logic;
---        MOSI     : in  std_logic;
         MISO     : out std_logic;
-        DIN      : in  std_logic_vector(WORD_SIZE-1 downto 0)
---        DOUT     : out std_logic_vector(WORD_SIZE-1 downto 0)
+        DIN      : in  std_logic_vector(7 downto 0)
     );
     end component;
 begin
-test_data<=w_data;
     -- Instantiate I2C master
     i2c_master_inst : i2c_master
         port map (
             clk_200kHz => w_200kHz,
-            reset      => reset,
+            reset      => rst,
             temp_data  => w_data,
             SDA        => TMP_SDA,
             SDA_dir    => sda_dir,
@@ -109,7 +88,6 @@ test_data<=w_data;
         );
 spi_slave_inst: SPI_SLAVE_TX
 port map(clk=>CLK100MHZ,RST=>rst,SCLK=>sclk,MISO=>miso,CS_N=>cs,DIN=>w_data);
-    -- Set LED value to temp data
-    LED <= received_data_sig;
+    LED <= w_data;
 
 end Behavioral;
