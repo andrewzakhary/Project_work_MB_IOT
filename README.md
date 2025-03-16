@@ -34,14 +34,6 @@ The project is divided into several key components:
 
 The project successfully demonstrates the integration of an FPGA into an IoT network. The FPGA reads temperature data from the sensor, displays it on the seven-segment display, and transmits it wirelessly to the Raspberry Pi Pico W. The Pico W then publishes the data to the MQTT broker on the Raspberry Pi, where it can be viewed in the terminal.
 
-## Future Improvements
-
-1. **Online Dashboard**: Implement an online dashboard to monitor and control temperature sensor readings.
-2. **Additional IoT Node**: Add another node to react to temperature changes (e.g., safety mechanisms).
-3. **Full Duplex SPI**: Implement a full-duplex SPI interface for simultaneous data exchange.
-4. **Custom PCB**: Design a custom PCB to reduce the system's footprint.
-
-
 ## Getting Started
 
 ### Prerequisites
@@ -67,7 +59,7 @@ The project successfully demonstrates the integration of an FPGA into an IoT net
    - Connect the Pico W to the FPGA via SPI.
 
 3. **Raspberry Pi Setup**:
-   - Install the Mosquitto MQTT broker on the Raspberry Pi.
+   - Install the Mosquitto MQTT Client on the Raspberry Pi.
    - Run the MQTT subscriber script to view temperature data.
 
 ### Running the Project
