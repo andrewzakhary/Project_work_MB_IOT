@@ -89,4 +89,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Andrew Antwan Mikheal Fahmy Zakhary**  
   Email: [andrew-antwan-mikheal-fahmy.zakhary@stud.hshl.de](mailto:andrew-antwan-mikheal-fahmy.zakhary@stud.hshl.de)  
-  GitHub: [Your GitHub Profile](https://github.com/yourusername)
