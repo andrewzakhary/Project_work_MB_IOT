@@ -75,7 +75,7 @@ The project successfully demonstrates the integration of an FPGA into an IoT net
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](License.txt) file for details.
 
 ## Contact
 
